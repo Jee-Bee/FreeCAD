@@ -135,7 +135,12 @@ class FemInputWriterCcx(FemInputWriter.FemInputWriter):
 
         # constraints depend on step and depending on analysis type
         if self.analysis_type == "frequency":
-            pass
+            if self.selfweight_objects:
+                self.write_constraints_selfweight(inpfile)
+            if self.force_objects:
+                self.write_constraints_force(inpfile)
+            if self.pressure_objects:
+                self.write_constraints_pressure(inpfile)
         elif self.analysis_type == "static":
             if self.selfweight_objects:
                 self.write_constraints_selfweight(inpfile)
